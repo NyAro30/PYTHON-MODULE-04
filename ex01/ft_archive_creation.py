@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/19 20:56:32 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 18:05:13 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/22 18:28:39 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -59,7 +59,7 @@ def save_content(content: str) -> None:
                 f: typing.IO[str] = open(filename, "w")
                 f.write(content)
                 f.close()
-                print(f"Data saved in file '{filename}'.")
+                print(f"Data saved in file '{filename}'.\n")
             except OSError:
                 print("Data not saved.")
         else:
@@ -73,7 +73,7 @@ def save_content(content: str) -> None:
 
 
 def main() -> None:
-    print("=== Cyber Archives Recovery ===")
+    print("=== Cyber Archives Recovery & Preservation ===")
     arg = check_arg()
     if arg:
         content = open_and_read(arg)
@@ -84,7 +84,6 @@ def main() -> None:
             print(f"\n{transformed}")
             print("\n---")
             save_content(transformed)
-    print()
 
 
 if __name__ == "__main__":
