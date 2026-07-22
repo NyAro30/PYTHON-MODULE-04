@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/21 23:56:51 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 14:44:52 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/22 15:22:04 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -35,8 +35,8 @@ def open_and_read(file_name: str) -> str | None:
         print(f"File '{file_name}' closed.")
         return content
     except OSError as err:
-        print(f"[STDERR] Error opening file '{file_name}'",
-              f": {err}", file=sys.stderr)
+        print(f"[STDERR] Error opening file '{file_name}':",
+              f"{err}", file=sys.stderr)
         return None
 
 
@@ -64,11 +64,12 @@ def save_content(content: str) -> None:
                 f.close()
                 print(f"Data saved in file '{filename}'.")
             except OSError:
-                print("Data not saved.")
+                print("Data not saved.", file=sys.stderr)
         else:
             print("Not saving data.")
     except KeyboardInterrupt:
-        print("\n[!] Program interrupted by user (Ctrl+C). Exiting...")
+        print("\n[!] Program interrupted by user",
+              "(Ctrl+C). Exiting...", file=sys.stderr)
 
 
 def main() -> None:
