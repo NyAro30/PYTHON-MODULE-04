@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/19 14:01:45 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/19 20:57:49 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/22 17:47:04 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,7 @@ import typing
 
 
 def check_arg() -> str | None:
-    if len(sys.argv) == 1:
+    if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>\n")
         return None
     else:

@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/19 20:56:32 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/21 23:13:22 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/22 18:05:13 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,7 @@ import typing
 
 
 def check_arg() -> str | None:
-    if len(sys.argv) == 1:
+    if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>\n")
         return None
     else:
@@ -51,18 +51,25 @@ def transform_content(content: str) -> str:
 
 
 def save_content(content: str) -> None:
-    filename = input("Enter new file name (or empty): ")
-    if filename:
-        print(f"Saving data to '{filename}'")
-        try:
-            f: typing.IO[str] = open(filename, "w")
-            f.write(content)
-            f.close()
-            print(f"Data saved in file '{filename}'.")
-        except OSError:
-            print("Data not saved.")
-    else:
-        print("Not saving data.")
+    try:
+        filename = input("Enter new file name (or empty): ")
+        if filename:
+            print(f"Saving data to '{filename}'")
+            try:
+                f: typing.IO[str] = open(filename, "w")
+                f.write(content)
+                f.close()
+                print(f"Data saved in file '{filename}'.")
+            except OSError:
+                print("Data not saved.")
+        else:
+            print("Not saving data.")
+    except KeyboardInterrupt:
+        print("\n[!] Program interrupted by user",
+              "(Ctrl+C). Exiting...")
+    except EOFError:
+        print("\n[!] Program terminated by user",
+              "(Ctrl+D). Exiting...")
 
 
 def main() -> None:
