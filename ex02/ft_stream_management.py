@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/21 23:56:51 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 00:21:20 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/22 14:44:52 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -35,7 +35,8 @@ def open_and_read(file_name: str) -> str | None:
         print(f"File '{file_name}' closed.")
         return content
     except OSError as err:
-        print(f"[STDERR] Error opening file '{file_name}': {err}\n", file=sys.stderr)
+        print(f"[STDERR] Error opening file '{file_name}'",
+              f": {err}", file=sys.stderr)
         return None
 
 
@@ -51,19 +52,23 @@ def transform_content(content: str) -> str:
 
 
 def save_content(content: str) -> None:
-    print("Enter new file name (or empty): ")
-    filename = sys.stdin.readline()
-    if filename:
-        print(f"Saving data to '{filename}'")
-        try:
-            f: typing.IO[str] = open(filename, "w")
-            f.write(content)
-            f.close()
-            print(f"Data saved in file '{filename}'.")
-        except OSError:
-            print("Data not saved.")
-    else:
-        print("Not saving data.")
+    try:
+        sys.stdout.write("Enter new file name (or empty): ")
+        sys.stdout.flush()
+        filename = sys.stdin.readline().strip()
+        if filename:
+            print(f"Saving data to '{filename}'")
+            try:
+                f: typing.IO[str] = open(filename, "w")
+                f.write(content)
+                f.close()
+                print(f"Data saved in file '{filename}'.")
+            except OSError:
+                print("Data not saved.")
+        else:
+            print("Not saving data.")
+    except KeyboardInterrupt:
+        print("\n[!] Program interrupted by user (Ctrl+C). Exiting...")
 
 
 def main() -> None:
