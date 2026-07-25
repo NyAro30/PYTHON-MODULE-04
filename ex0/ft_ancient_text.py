@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_ancient_text.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: mny-aro- <mny-aro-@student.42.fr>            +#+  +:+       +#+       #
+#   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/19 14:01:45 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/25 08:19:09 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/26 01:10:04 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -37,7 +37,6 @@ def open_and_read(file_name: str) -> None:
         if f is not None:
             f.close()
             print(f"File '{file_name}' closed.")
-
 
 def main() -> None:
     print("=== Cyber Archives Recovery ===")
