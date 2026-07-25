@@ -4,10 +4,10 @@
 #                                                          :::      ::::::::  #
 #   ft_ancient_text.py                                   :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
-#   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
+#   By: mny-aro- <mny-aro-@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/19 14:01:45 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 17:47:04 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/25 08:19:09 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -25,15 +25,18 @@ def check_arg() -> str | None:
 
 def open_and_read(file_name: str) -> None:
     print(f"Accessing file '{file_name}'")
+    f: typing.IO[str] | None = None
     try:
-        f: typing.IO[str] = open(file_name, "r")
+        f = open(file_name, "r")
         print("---")
         print(f"\n{f.read()}")
         print("\n---")
-        f.close()
-        print(f"File '{file_name}' closed.")
     except OSError as err:
         print(f"Error opening file '{file_name}': {err}\n")
+    finally:
+        if f is not None:
+            f.close()
+            print(f"File '{file_name}' closed.")
 
 
 def main() -> None:

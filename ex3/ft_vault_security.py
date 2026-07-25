@@ -7,7 +7,7 @@
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/07/22 14:49:49 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 18:01:52 by mny-aro-           ###   ########.fr      #
+#   Updated: 2026/07/26 00:41:35 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -23,7 +23,7 @@ def secure_archive(filename: str,
     elif action == "w":
         try:
             with open(filename, action) as file:
-                data = file.write(content)
+                file.write(content)
             return True, "Content successfully written to file"
         except OSError as err:
             return False, str(err)

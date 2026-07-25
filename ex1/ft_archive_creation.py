@@ -2,12 +2,12 @@
 # ########################################################################### #
 #   shebang: 1                                                                #
 #                                                          :::      ::::::::  #
-#   ft_stream_management.py                              :+:      :+:    :+:  #
+#   ft_archive_creation.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: mny-aro- <mny-aro-@student.42antananarivo.   +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/07/21 23:56:51 by mny-aro-            #+#    #+#            #
-#   Updated: 2026/07/22 18:31:39 by mny-aro-           ###   ########.fr      #
+#   Created: 2026/07/19 20:56:32 by mny-aro-            #+#    #+#            #
+#   Updated: 2026/07/25 23:42:15 by mny-aro-           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,7 @@ import typing
 
 
 def check_arg() -> str | None:
-    if len(sys.argv) == 1:
+    if len(sys.argv) != 2:
         print("Usage: ft_ancient_text.py <file>\n")
         return None
     else:
@@ -25,19 +25,21 @@ def check_arg() -> str | None:
 
 def open_and_read(file_name: str) -> str | None:
     print(f"Accessing file '{file_name}'")
+    f: typing.IO[str] | None = None
     try:
-        f: typing.IO[str] = open(file_name, "r")
+        f = open(file_name, "r")
         print("---")
         content = f.read()
         print(f"\n{content}")
         print("\n---")
-        f.close()
-        print(f"File '{file_name}' closed.")
         return content
     except OSError as err:
-        print(f"[STDERR] Error opening file '{file_name}':",
-              f"{err}", file=sys.stderr)
+        print(f"Error opening file '{file_name}': {err}\n")
         return None
+    finally:
+        if f is not None:
+            f.close()
+            print(f"File '{file_name}' closed.")
 
 
 def transform_content(content: str) -> str:
@@ -53,25 +55,29 @@ def transform_content(content: str) -> str:
 
 def save_content(content: str) -> None:
     try:
-        sys.stdout.write("Enter new file name (or empty): ")
-        sys.stdout.flush()
-        filename = sys.stdin.readline().strip()
+        filename = input("Enter new file name (or empty): ").strip()
         if filename:
             print(f"Saving data to '{filename}'")
+            f: typing.IO[str] | None = None
             try:
-                f: typing.IO[str] = open(filename, "w")
+                f = open(filename, "w")
                 f.write(content)
-                f.close()
-                print(f"Data saved in file '{filename}'.")
+                print(f"Data saved in file '{filename}'.\n")
             except OSError as err:
-                print(f"[STDERR] Error opening file '{filename}':",
-                      f"{err}", file=sys.stderr)
-                print("Data not saved.", file=sys.stderr)
+                print(err)
+                print("Data not saved.")
+            finally:
+                if f is not None:
+                    f.close()
+                    print(f"File '{filename}' closed.")
         else:
             print("Not saving data.")
     except KeyboardInterrupt:
         print("\n[!] Program interrupted by user",
-              "(Ctrl+C). Exiting...", file=sys.stderr)
+              "(Ctrl+C). Exiting...")
+    except EOFError:
+        print("\n[!] Program terminated by user",
+              "(Ctrl+D). Exiting...")
 
 
 def main() -> None:
